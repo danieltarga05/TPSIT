@@ -19,9 +19,9 @@ int main(int argc, char *argv[])
             scanf("%d", &numeri[i]);
         close(p0p1[0]);
         close(p1p0[1]);
-        write(p0p1[1], numeri, sizeof(numeri));
+        write(p0p1[1], numeri, dim);
         read(p1p0[0], (void *)&somma, sizeof(somma));
-        printf("PADRE: somma %d\n", somma);
+        printf("Somma %d\n", somma);
         exit(0);
     }
     else
@@ -32,12 +32,10 @@ int main(int argc, char *argv[])
         close(p0p1[1]);
         close(p1p0[0]);
 
-        read(p0p1[0], numeri, sizeof(numeri));
+        read(p0p1[0], numeri, dim);
 
-        for (int i = 0; i < dim; i++)
-        {
-            somma = somma + numeri[i];
-        }
+        for (int i = 0; i < dim; i++)        
+            somma = somma + numeri[i];       
         printf("FIGLIO: somma %d\n", somma);
         write(p1p0[1], &somma, sizeof(somma));
 
