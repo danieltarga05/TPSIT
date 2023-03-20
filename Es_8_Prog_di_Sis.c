@@ -15,9 +15,7 @@ int main(int argc, char *argv[])
 
     int p1p2[2], pid;
     char stringa[50];
-
     pipe(p1p2);
-
     pid = fork();
     if (pid == 0)
     {
@@ -38,7 +36,6 @@ int main(int argc, char *argv[])
         }
     }
     close(p1p2[1]);
-
     pid = fork();
     if (pid == 0)
     {
@@ -52,7 +49,6 @@ int main(int argc, char *argv[])
         execl("/usr/bin/sort", "sort", (char *)0);
         return -1;
     }
-
     close(p1p2[0]);
     wait(&pid);
     return 0;
