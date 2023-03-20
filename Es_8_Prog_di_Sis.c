@@ -4,7 +4,8 @@
 #include <fcntl.h>
 #include <string.h>
 #include <sys/wait.h>
-
+#define WRITE 1
+#define READ 0
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -32,18 +33,18 @@ int main(int argc, char *argv[])
             }
 
             strcat(stringa, "\n");
-            write(p1p2[1], stringa, strlen(stringa));
+            write(p1p2[1], stringa, sizeof(stringa));
         }
     }
     close(p1p2[1]);
     pid = fork();
     if (pid == 0)
     {
-        close(0);
+        close(READ);
         dup(p1p2[0]);
         close(p1p2[0]);
 
-        close(1);
+        close(WRITE);
         open(argv[1], O_WRONLY | O_CREAT, 0777);
 
         execl("/usr/bin/sort", "sort", (char *)0);
