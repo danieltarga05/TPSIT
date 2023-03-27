@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc != 2)
+    if (argc != 3)
     {
         printf("Numero argomenti sbagliato\n");
         exit(1);
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
         close(1);
         dup(p1p0[1]);
         close(p1p0[1]);
-        execl("/usr/bin/cat", "cat", argv[1], (char *)0);
+        execl("/usr/bin/ls", "ls", (char *)0);
         return -1;
     }
 
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         close(0);
         dup(p1p0[0]);
         close(p1p0[0]);
-        execl("/usr/bin/tee", "tee", (char *)0);
+        execl("/usr/bin/tee", "tee", argv[1], (char *)0);
         return -1;
     }
 
